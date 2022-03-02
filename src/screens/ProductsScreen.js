@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ListItem from "../components/ListItem";
 import Colors from "../constants/Colors";
 
-const ProductsScreen = ({ navigation, route }) => {
+const ProductsScreen = ({ navigation }) => {
   const products = useSelector((state) => state.products.availableProducts);
 
   return (

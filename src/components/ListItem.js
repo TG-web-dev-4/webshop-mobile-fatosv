@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Button } from "react-native";
 import Colors from "../constants/Colors";
+import ProductButtons from "./ProductButtons";
 
 const GridTile = ({ onSelect, onAddToCart, image, name, price }) => {
   return (
@@ -15,11 +15,7 @@ const GridTile = ({ onSelect, onAddToCart, image, name, price }) => {
           <Text style={styles.price}>€{price.toFixed(2)}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <Button
-            title="Add to Cart"
-            color={Colors.secondary}
-            onPress={onAddToCart}
-          />
+          <ProductButtons />
         </View>
       </View>
     </TouchableOpacity>
@@ -29,7 +25,7 @@ const GridTile = ({ onSelect, onAddToCart, image, name, price }) => {
 const styles = StyleSheet.create({
   product: {
     margin: 10,
-    height: 250,
+    height: 300,
     width: 350,
     backgroundColor: Colors.background,
     borderRadius: 15,
@@ -66,7 +62,10 @@ const styles = StyleSheet.create({
     fontFamily: "main-text",
     color: Colors.primary,
   },
-  buttonContainer: {},
+  buttonContainer: {
+    width: "100%",
+    alignItems: "flex-end",
+  },
 });
 
 export default GridTile;

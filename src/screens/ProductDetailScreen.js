@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  View,
-  ScrollView,
-  Text,
-  Image,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Text, Image, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import Colors from "../constants/Colors";
-import { AntDesign } from "@expo/vector-icons";
+import ProductButtons from "../components/ProductButtons";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId } = route.params;
@@ -23,14 +15,7 @@ const ProductDetailScreen = ({ route }) => {
       <Image style={styles.image} source={{ uri: selectedProduct.imageUrl }} />
       <View style={styles.actionContainer}>
         <Text style={styles.price}>€{selectedProduct.price.toFixed(2)}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity>
-            <AntDesign name="shoppingcart" size={27} color={Colors.secondary} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <AntDesign name="hearto" size={27} color={Colors.secondary} />
-          </TouchableOpacity>
-        </View>
+        <ProductButtons onAddToCart={() => {}} onAddToFav={() => {}} />
       </View>
       <Text style={styles.description}>{selectedProduct.description}</Text>
     </ScrollView>
@@ -55,13 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.primary,
     marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "20%",
-    justifyContent: "space-between",
-    margin: 10,
   },
   description: {
     fontFamily: "main-text",
