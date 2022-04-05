@@ -1,11 +1,13 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ListItem from "../components/ListItem";
 import Colors from "../constants/Colors";
+import * as actions from "../store/actions/cart";
 
 const ProductsScreen = ({ navigation }) => {
   const products = useSelector((state) => state.products.availableProducts);
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.screen}>

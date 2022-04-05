@@ -1,14 +1,16 @@
 import React from "react";
 import { View, ScrollView, Text, Image, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../constants/Colors";
 import ProductButtons from "../components/ProductButtons";
+import * as actions from "../store/actions/cart";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId } = route.params;
   const selectedProduct = useSelector((state) =>
     state.products.availableProducts.find((prod) => prod.id === productId)
   );
+  const dispatch = useDispatch();
 
   return (
     <ScrollView style={styles.screen}>

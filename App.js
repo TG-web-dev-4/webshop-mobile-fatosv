@@ -4,10 +4,12 @@ import { Provider } from "react-redux";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import productsReducer from "./src/store/reducers/products";
-import Navigator from "./src/navigator/Navigator";
+import cartReducer from "./src/store/reducers/cart";
+import TabNavigator from "./src/navigator/TabNavigator";
 
 const rootReducer = combineReducers({
   products: productsReducer,
+  cart: cartReducer,
 });
 
 const store = createStore(rootReducer);
@@ -34,7 +36,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Navigator />
+      <TabNavigator />
     </Provider>
   );
 }
