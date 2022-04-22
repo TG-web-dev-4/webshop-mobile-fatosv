@@ -4,12 +4,15 @@ import ProductDetailScreen from "../screens/ProductDetailScreen";
 import ShoppingCartScreen from "../screens/ShoppingCartScreen";
 import Colors from "../constants/Colors";
 import HomeScreen from "../screens/HomeScreen";
+import { TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="Products Stack"
       screenOptions={{
         headerStyle: {
           backgroundColor: Colors.background,
@@ -21,25 +24,31 @@ const StackNavigator = () => {
       }}
     >
       <Stack.Screen
-        name="Home Stack"
-        component={HomeScreen}
+        name="Products Stack"
+        component={ProductsScreen}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Products"
-        component={ProductsScreen}
-        options={{ title: "ALL PRODUCTS" }}
-      />
-      <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route, navigation }) => ({
+          title: route.params.name,
+          headerBackVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Products Stack")}
+            >
+              <AntDesign name="back" size={24} color={Colors.secondary} />
+            </TouchableOpacity>
+          ),
+        })}
       />
-      <Stack.Screen name="CartScreen" component={ShoppingCartScreen} />
     </Stack.Navigator>
   );
 };
 
 export default StackNavigator;
+
+// navigation.pop();

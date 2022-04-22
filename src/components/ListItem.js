@@ -1,12 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import Colors from "../constants/Colors";
-import ProductButtons from "./ProductButtons";
 
-const GridTile = ({ onSelect, onAddToCart, image, name, price }) => {
+const { height, width } = Dimensions.get("window");
+
+const ListItem = ({ onSelect, image, name, price }) => {
   return (
     <TouchableOpacity onPress={onSelect}>
-      <View style={styles.product}>
+      <View style={styles.itemContainer}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={{ uri: image }} />
         </View>
@@ -14,19 +22,16 @@ const GridTile = ({ onSelect, onAddToCart, image, name, price }) => {
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.price}>€{price.toFixed(2)}</Text>
         </View>
-        <View style={styles.buttonContainer}>
-          <ProductButtons />
-        </View>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  product: {
+  itemContainer: {
     margin: 10,
-    height: 300,
-    width: 350,
+    height: height * 0.25,
+    width: width * 0.85,
     backgroundColor: Colors.background,
     borderRadius: 15,
     shadowColor: Colors.primary,
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    height: "70%",
+    height: "80%",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: "hidden",
@@ -57,10 +62,12 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "title-text",
     color: Colors.primary,
+    fontSize: 16,
   },
   price: {
-    fontFamily: "main-text",
+    fontFamily: "title-text",
     color: Colors.primary,
+    fontSize: 16,
   },
   buttonContainer: {
     width: "100%",
@@ -68,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GridTile;
+export default ListItem;

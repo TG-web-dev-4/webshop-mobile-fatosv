@@ -2,15 +2,18 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FavoritesScreen from "../screens/FavoritesScreen";
-import ProductsScreen from "../screens/ProductsScreen";
 import ShoppingCartScreen from "../screens/ShoppingCartScreen";
 import Colors from "../constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import StackNavigator from "./StackNavigator";
+import HomeScreen from "../screens/HomeScreen";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { cartTotalItems } = useSelector((state) => state.shoppingCart);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -25,20 +28,30 @@ const TabNavigator = () => {
       >
         <Tab.Screen
           name="Home"
-          component={StackNavigator}
+          component={HomeScreen}
           options={{
             tabBarIcon: (tabInfo) => {
-              return <AntDesign name="home" size={24} color={tabInfo.color} />;
+              return (
+                <AntDesign
+                  name="home"
+                  size={tabInfo.size}
+                  color={tabInfo.color}
+                />
+              );
             },
           }}
         />
         <Tab.Screen
           name="Products"
-          component={ProductsScreen}
+          component={StackNavigator}
           options={{
             tabBarIcon: (tabInfo) => {
               return (
-                <AntDesign name="appstore-o" size={24} color={tabInfo.color} />
+                <AntDesign
+                  name="appstore-o"
+                  size={tabInfo.size}
+                  color={tabInfo.color}
+                />
               );
             },
           }}
@@ -49,7 +62,11 @@ const TabNavigator = () => {
           options={{
             tabBarIcon: (tabInfo) => {
               return (
-                <AntDesign name="hearto" size={24} color={tabInfo.color} />
+                <AntDesign
+                  name="hearto"
+                  size={tabInfo.size}
+                  color={tabInfo.color}
+                />
               );
             },
           }}
@@ -62,10 +79,15 @@ const TabNavigator = () => {
               return (
                 <AntDesign
                   name="shoppingcart"
-                  size={24}
+                  size={tabInfo.size}
                   color={tabInfo.color}
                 />
               );
+            },
+            tabBarBadge: cartTotalItems,
+            tabBarBadgeStyle: {
+              backgroundColor: Colors.accent,
+              color: Colors.primary,
             },
           }}
         />

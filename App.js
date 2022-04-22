@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { createStore, combineReducers } from "redux";
-import { Provider } from "react-redux";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
-import productsReducer from "./src/store/reducers/products";
-import cartReducer from "./src/store/reducers/cart";
 import TabNavigator from "./src/navigator/TabNavigator";
-
-const rootReducer = combineReducers({
-  products: productsReducer,
-  cart: cartReducer,
-});
-
-const store = createStore(rootReducer);
+import { store } from "./src/store";
+import { Provider } from "react-redux";
+import { getTotal } from "./src/features/shoppingcart/shoppingCartSlice";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -20,6 +12,8 @@ const fetchFonts = () => {
     "main-text": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 };
+
+store.dispatch(getTotal());
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);

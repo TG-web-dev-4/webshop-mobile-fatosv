@@ -1,13 +1,11 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ListItem from "../components/ListItem";
 import Colors from "../constants/Colors";
-import * as actions from "../store/actions/cart";
 
 const ProductsScreen = ({ navigation }) => {
-  const products = useSelector((state) => state.products.availableProducts);
-  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
 
   return (
     <View style={styles.screen}>
@@ -21,11 +19,11 @@ const ProductsScreen = ({ navigation }) => {
             price={itemData.item.price}
             onSelect={() =>
               navigation.navigate("ProductDetail", {
+                id: itemData.item.id,
+                item: itemData.item,
                 name: itemData.item.name,
-                productId: itemData.item.id,
               })
             }
-            onAddToCart={() => {}}
           />
         )}
       />
@@ -36,6 +34,7 @@ const ProductsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    paddingTop: "15%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.background,
