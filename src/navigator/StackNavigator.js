@@ -37,9 +37,7 @@ const StackNavigator = () => {
           title: route.params.name,
           headerBackVisible: false,
           headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Products Stack")}
-            >
+            <TouchableOpacity onPress={() => navigation.pop()}>
               <AntDesign name="back" size={24} color={Colors.secondary} />
             </TouchableOpacity>
           ),
